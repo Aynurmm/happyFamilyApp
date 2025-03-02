@@ -1,5 +1,6 @@
 package human;
 
+import Enums.DayOfWeek;
 import family.Family;
 import pet.Pet;
 
@@ -11,12 +12,12 @@ public class Human {
     private String humanSurname;
     private int year;
     private int iq;
-    private String[][] schedule;
+    private DayOfWeek[][] schedule;
     private Family family;
 //    private Pet pet;
 
 
-    public Human(String humanName, String humanSurname, int year, int iq, String[][] schedule,Family family) {
+    public Human(String humanName, String humanSurname, int year, int iq, DayOfWeek[][] schedule,Family family) {
         this.humanName = humanName;
         this.humanSurname = humanSurname;
         this.year = year;
@@ -24,7 +25,7 @@ public class Human {
         this.schedule = schedule;
         this.family=family;
     }
-    public Human(String humanName, String humanSurname, int year, int iq, String[][] schedule) {
+    public Human(String humanName, String humanSurname, int year, int iq, DayOfWeek[][] schedule) {
         this.humanName = humanName;
         this.humanSurname = humanSurname;
         this.year = year;

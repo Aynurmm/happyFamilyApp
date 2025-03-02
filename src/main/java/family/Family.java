@@ -4,6 +4,7 @@ import human.Human;
 import pet.Pet;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Family {
     private Human mother;
@@ -83,12 +84,36 @@ public class Family {
         this.children = newChildren;
         return true;
     }
+    public boolean deleteChild(Human child) {
+        for (int i = 0; i < children.length; i++) {
+            if (children[i].equals(child)) {
+                return deleteChild(i);
+            }
+        }
+        return false;
+    }
+
 
     public int countFamily() {
         if (children != null) {
             return 2 + children.length;
         }
         return 2;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Family family = (Family) o;
+        return Objects.equals(mother, family.mother) && Objects.equals(father, family.father) && Arrays.equals(children, family.children) && Objects.equals(pet, family.pet);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(mother, father, pet);
+        result = 31 * result + Arrays.hashCode(children);
+        return result;
     }
 
     @Override
