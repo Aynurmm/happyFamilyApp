@@ -3,26 +3,31 @@ package family;
 import human.Human;
 import pet.Pet;
 
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 
 public class Family {
     private Human mother;
     private Human father;
-    private Human[] children;
-    private Pet pet;
+    private ArrayList<Human> children;
+    private List<Pet> pet;
 
-    public Family(Human mother, Human father, Human[] children, Pet pet) {
+    public Family(Human mother, Human father, ArrayList<Human> children, List<Pet> pet) {
         this.mother = mother;
         this.father = father;
         this.children = children;
-        this.pet = pet;
+        this.pet =  pet;
     }
 
 
     public Family(Human mother, Human father) {
         this.mother = mother;
         this.father = father;
+    }
+
+    public Family(Human mother, Human father, List<Pet> pet) {
+        this.mother = mother;
+        this.father = father;
+        this.pet = pet;
     }
 
     public Human getMother() {
@@ -41,52 +46,42 @@ public class Family {
         this.father = father;
     }
 
-    public Human[] getChildren() {
+    public ArrayList<Human> getChildren() {
         return children;
     }
 
-    public void setChildren(Human[] children) {
-        this.children = children;
-    }
-
-    public Pet getPet() {
+    public List<Pet> getPet() {
         return pet;
     }
 
-    public void setPet(Pet pet) {
+
+    public void setChildren(ArrayList<Human> children) {
+        this.children = children;
+    }
+
+
+
+    public void setPet(List<Pet> pet) {
         this.pet = pet;
     }
 
     public void addChild(Human child) {
-        Human[] newChildren = new Human[children.length + 1];
-        for (int i = 0; i < children.length; i++) {
-            newChildren[i] = children[i];
-        }
-        newChildren[newChildren.length - 1] = child;
-        this.children = newChildren;
+        children.add(child);
         child.setFamily(this);
-        System.out.println(child+"successfully added");
+        System.out.println(child + "successfully added");
     }
 
     public boolean deleteChild(int index) {
-        if (index < 0 || index >= children.length) {
+        if (index < 0 || index >= children.size()) {
             return false;
         }
-        Human[] newChildren = new Human[children.length - 1];
-        int newIndex = 0;
-        for (int i = 0; i < children.length; i++) {
-            if (i == index) {
-                children[i].setFamily(null);
-                continue;
-            }
-            newChildren[newIndex++] = children[i];
-        }
-        this.children = newChildren;
+        children.remove(index).setFamily(null);
         return true;
     }
+
     public boolean deleteChild(Human child) {
-        for (int i = 0; i < children.length; i++) {
-            if (children[i].equals(child)) {
+        for (int i = 0; i < children.size(); i++) {
+            if (children.get(i).equals(child)) {
                 return deleteChild(i);
             }
         }
@@ -95,8 +90,8 @@ public class Family {
 
 
     public int countFamily() {
-        if (children != null) {
-            return 2 + children.length;
+        if (children != null && !children.isEmpty()) {
+            return 2 + children.size();
         }
         return 2;
     }
@@ -106,14 +101,12 @@ public class Family {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Family family = (Family) o;
-        return Objects.equals(mother, family.mother) && Objects.equals(father, family.father) && Arrays.equals(children, family.children) && Objects.equals(pet, family.pet);
+        return Objects.equals(mother, family.mother) && Objects.equals(father, family.father) && Objects.equals(children, family.children) && Objects.equals(pet, family.pet);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(mother, father, pet);
-        result = 31 * result + Arrays.hashCode(children);
-        return result;
+        return Objects.hash(mother, father, children, pet);
     }
 
     @Override
@@ -122,7 +115,7 @@ public class Family {
                 "Family:\n Mother: %s\n Father: %s\n Children: %s\n Pet: %s",
                 (mother != null ? mother : "No mother"),
                 (father != null ? father : "No father"),
-                (children != null && children.length > 0 ? Arrays.toString(children) : "No children"),
+                (children != null && !children.isEmpty() ? children.toString() : "No children"),
                 (pet != null ? pet : "No pet")
         );
     }

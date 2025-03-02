@@ -1,2 +1,5 @@
-package interfaces;public interface Foulable {
+package interfaces;
+
+public interface Foulable {
+    void foul();
 }
