@@ -1,16 +1,18 @@
 package pet;
 
+import Enums.Species;
+
 import java.util.Arrays;
 
 public class Pet {
 
-private String spices;
+private Species spices;
 private String nickName;
 private int petAge;
 private int trickLevel;
 private String[] habits;
 
-    public Pet(String spices, String nickName, int petAge, int trickLevel, String[] habits) {
+    public Pet(Species spices, String nickName, int petAge, int trickLevel, String[] habits) {
         this.spices = spices;
         this.nickName = nickName;
         this.petAge = petAge;
@@ -20,16 +22,16 @@ private String[] habits;
     public Pet(){
 
     }
-    public Pet(String spices,String nickName){
+    public Pet(Species spices,String nickName){
         this.spices=spices;
         this.nickName=nickName;
     }
 
-    public String getSpices() {
+    public Species getSpices() {
         return spices;
     }
 
-    public void setSpices(String spices) {
+    public void setSpices(Species spices) {
         this.spices = spices;
     }
 
