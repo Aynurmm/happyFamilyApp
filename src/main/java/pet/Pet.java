@@ -1,35 +1,40 @@
 package pet;
 
+import Enums.Species;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 
-public class Pet {
+public abstract class Pet {
 
-private String spices;
-private String nickName;
-private int petAge;
-private int trickLevel;
-private String[] habits;
+    private Species spices;
+    private String nickName;
+    private int petAge;
+    private int trickLevel;
+    private Set<String> habits;
 
-    public Pet(String spices, String nickName, int petAge, int trickLevel, String[] habits) {
-        this.spices = spices;
+    public Pet(String nickName, int petAge, int trickLevel, Set<String> habits) {
         this.nickName = nickName;
         this.petAge = petAge;
         this.trickLevel = trickLevel;
         this.habits = habits;
     }
-    public Pet(){
+
+    public Pet() {
 
     }
-    public Pet(String spices,String nickName){
-        this.spices=spices;
-        this.nickName=nickName;
+
+    public Pet(Species spices, String nickName) {
+        this.spices = spices;
+        this.nickName = nickName;
     }
 
-    public String getSpices() {
+    public Species getSpices() {
         return spices;
     }
 
-    public void setSpices(String spices) {
+    public void setSpices(Species spices) {
         this.spices = spices;
     }
 
@@ -53,15 +58,19 @@ private String[] habits;
         return trickLevel;
     }
 
+    public Set<String> getHabits() {
+        return habits;
+    }
+
     public void setTrickLevel(int trickLevel) {
         this.trickLevel = trickLevel;
     }
 
-    public String[] getHabits() {
+    public Set<String> habits() {
         return habits;
     }
 
-    public void setHabits(String[] habits) {
+    public void setHabits(Set<String> habits) {
         this.habits = habits;
     }
 
@@ -72,19 +81,15 @@ private String[] habits;
                 ", nickName='" + nickName + '\'' +
                 ", petAge=" + petAge +
                 ", trickLevel=" + trickLevel +
-                ", habits=" + Arrays.toString(habits) +
+                ", habits=" + habits.toString() +
                 '}';
     }
 
-    public void eat(){
+    public void eat() {
         System.out.println("I am eating");
     }
 
-    public  void respond(){
-        System.out.println("Hello owner I am "+this.nickName+". I miss you.");
-    }
+    public abstract void respond();
 
-    public void foul(){
-        System.out.println("I need to cover it up");
-    }
+
 }
